@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArcadeVault | Play Free Online Web Games</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        vault: {
+                            bg: '#090a0f',
+                            card: '#12141f',
+                            border: '#1f2438',
+                            accent: '#8b5cf6',
+                            accentHover: '#7c3aed',
+                            cyan: '#06b6d4',
+                            pink: '#ec4899',
+                            text: '#f3f4f6',
+                            muted: '#9ca3af'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tone.js for Ambient Synth Music -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+    
+    <!-- Custom CSS for Sleek Game Grid & Effects -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #090a0f;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1f2438;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #374151;
+        }
+
+        /* Neon Glow Effects */
+        .neon-border {
+            box-shadow: 0 0 15px rgba(139, 92, 246, 0.25);
+        }
+        .neon-border:hover {
+            box-shadow: 0 0 25px rgba(139, 92, 246, 0.5), 0 0 10px rgba(6, 182, 212, 0.3);
+        }
+
+        .glass-panel {
+            background: rgba(18, 20, 31, 0.85);
+            backdrop-filter: blur(16px);
+        }
+
+        /* Hide scrollbars for clean category tabs */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Pulsing Glow Animation */
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 15px rgba(139, 92, 246, 0.4); }
+            50% { box-shadow: 0 0 25px rgba(6, 182, 212, 0.6); }
+        }
+        .pulse-glow {
+            animation: pulseGlow 3s infinite ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-vault-bg text-vault-text font-sans antialiased min-h-screen flex flex-col selection:bg-vault-accent selection:text-white">
+
+    <!-- Navigation Header -->
+    <header class="sticky top-0 z-40 bg-vault-bg/90 backdrop-blur-md border-b border-vault-border px-4 py-3 transition-all">
+        <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+            
+            <!-- Brand Logo & Discord Banner -->
+            <div class="flex items-center gap-4">
+                <a href="#" onclick="switchCategory('All')" class="flex items-center gap-2 group">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-600 via-indigo-600 to-cyan-500 flex items-center justify-center text-white font-extrabold text-2xl shadow-lg shadow-violet-500/30 group-hover:scale-105 transition-transform">
+                        <i class="fa-solid fa-gamepad"></i>
+                    </div>
+                    <span class="font-extrabold text-xl tracking-wider hidden sm:inline-block bg-clip-text text-transparent bg-gradient-to-r from-white via-violet-200 to-cyan-400">
+                        Arcade<span class="text-vault-cyan">Vault</span>
+                    </span>
+                </a>
+
+                <!-- Discord Badge for abs_org -->
+                <a href="https://discord.com" target="_blank" rel="noopener noreferrer" 
+                   class="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#5865F2]/10 border border-[#5865F2]/40 text-[#5865F2] hover:bg-[#5865F2] hover:text-white transition-all text-xs font-bold shadow-md shadow-[#5865F2]/10">
+                    <svg class="w-4 h-4 fill-current" viewBox="0 0 127.14 96.36">
+                        <path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1,105.25,105.25,0,0,0,32.19-16.14c2.64-27.38-4.51-51.11-18.91-72.15ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,45.91,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,45.91,96.12,53,91.08,65.69,84.69,65.69Z"/>
+                    </svg>
+                    <span>abs_org</span>
+                </a>
+            </div>
+
+            <!-- Search Bar -->
+            <div class="flex-1 max-w-md relative">
+                <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-vault-muted text-sm"></i>
+                <input type="text" id="searchInput" placeholder="Search 50+ games (e.g. Space, Snake, Racing)..." 
+                       class="w-full bg-vault-card border border-vault-border rounded-full pl-10 pr-10 py-2 text-xs sm:text-sm text-vault-text placeholder-vault-muted focus:outline-none focus:border-vault-accent transition-all">
+                <button id="clearSearch" class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-vault-muted hover:text-white text-xs">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Top Actions: Ambient Audio Synth, Add Game, Profile Stats -->
+            <div class="flex items-center gap-2 sm:gap-3">
+                <!-- Calm Synth Sound Generator -->
+                <button id="audioToggleBtn" title="Toggle Synth Calm Ambient Music" 
+                        class="p-2.5 rounded-full bg-vault-card border border-vault-border hover:border-vault-accent text-vault-muted hover:text-vault-accent transition-all flex items-center justify-center">
+                    <i id="audioIcon" class="fa-solid fa-volume-xmark text-sm sm:text-base"></i>
+                </button>
+
+                <!-- Profile / Achievements Modal Trigger -->
+                <button id="openProfileBtn" title="Player Stats & Achievements"
+                        class="p-2.5 rounded-full bg-vault-card border border-vault-border hover:border-vault-cyan text-vault-muted hover:text-vault-cyan transition-all flex items-center justify-center relative">
+                    <i class="fa-solid fa-trophy text-sm sm:text-base"></i>
+                    <span id="badgeCount" class="absolute -top-1 -right-1 bg-vault-pink text-white text-[9px] font-extrabold w-4 h-4 rounded-full flex items-center justify-center">0</span>
+                </button>
+
+                <!-- Custom Game Upload Button -->
+                <button id="openUploadBtn" 
+                        class="flex items-center gap-2 px-3.5 py-2 rounded-full bg-gradient-to-r from-vault-accent to-vault-cyan hover:opacity-90 text-white text-xs font-bold shadow-lg shadow-violet-500/20 transition-all hover:scale-105 active:scale-95">
+                    <i class="fa-solid fa-plus text-xs"></i>
+                    <span class="hidden sm:inline">Submit Game</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Category Filter Bar -->
+    <nav class="border-b border-vault-border bg-vault-bg/60 px-4 py-3 sticky top-[61px] z-30 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto flex items-center justify-between gap-4 overflow-x-auto no-scrollbar">
+            <div class="flex items-center gap-2 min-w-max" id="categoryTabs">
+                <button data-category="All" class="category-btn active px-4 py-1.5 rounded-full text-xs font-bold border transition-all bg-vault-accent text-white border-vault-accent">
+                    <i class="fa-solid fa-grip mr-1.5"></i>All Games
+                </button>
+                <button data-category="Action" class="category-btn px-4 py-1.5 rounded-full text-xs font-bold border transition-all bg-vault-card text-vault-muted border-vault-border hover:text-white hover:border-vault-accent">
+                    <i class="fa-solid fa-crosshair mr-1.5"></i>Action & Shooting
+                </button>
+                <button data-category="Racing" class="category-btn px-4 py-1.5 rounded-full text-xs font-bold border transition-all bg-vault-card text-vault-muted border-vault-border hover:text-white hover:border-vault-accent">
+                    <i class="fa-solid fa-gauge-high mr-1.5"></i>Racing & Driving
+                </button>
+                <button data-category="Puzzle" class="category-btn px-4 py-1.5 rounded-full text-xs font-bold border transition-all bg-vault-card text-vault-muted border-vault-border hover:text-white hover:border-vault-accent">
+                    <i class="fa-solid fa-brain mr-1.5"></i>Puzzle & Brain
+                </button>
+                <button data-category="Arcade" class="category-btn px-4 py-1.5 rounded-full text-xs font-bold border transition-all bg-vault-card text-vault-muted border-vault-border hover:text-white hover:border-vault-accent">
+                    <i class="fa-solid fa-ghost mr-1.5"></i>Arcade & Retro
+                </button>
+                <button data-category="Sports" class="category-btn px-4 py-1.5 rounded-full text-xs font-bold border transition-all bg-vault-card text-vault-muted border-vault-border hover:text-white hover:border-vault-accent">
+                    <i class="fa-solid fa-basketball mr-1.5"></i>Sports & Skill
+                </button>
+                <button data-category="2Player" class="category-btn px-4 py-1.5 rounded-full text-xs font-bold border transition-all bg-vault-card text-vault-muted border-vault-border hover:text-white hover:border-vault-accent">
+                    <i class="fa-solid fa-user-group mr-1.5"></i>2 Player Games
+                </button>
+                <button data-category="Saved" class="category-btn px-4 py-1.5 rounded-full text-xs font-bold border transition-all bg-vault-card text-vault-muted border-vault-border hover:text-white hover:border-vault-accent">
+                    <i class="fa-solid fa-heart mr-1.5 text-vault-pink"></i>Favorites
+                </button>
+            </div>
+
+            <div class="text-xs text-vault-muted whitespace-nowrap hidden lg:block">
+                Available Games: <span id="gameCounter" class="font-bold text-white">0</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Spotlight Section -->
+    <section class="max-w-7xl w-full mx-auto px-4 pt-6 pb-2" id="heroSpotlight">
+        <div class="relative rounded-3xl overflow-hidden bg-gradient-to-r from-violet-900/60 via-indigo-900/40 to-vault-card border border-vault-border p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl">
+            <div class="space-y-3 max-w-xl">
+                <span class="px-3 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-widest bg-vault-cyan/20 text-vault-cyan border border-vault-cyan/30">
+                    <i class="fa-solid fa-fire mr-1"></i> Featured Game
+                </span>
+                <h1 class="text-2xl sm:text-4xl font-extrabold text-white tracking-tight leading-tight">
+                    Space Shooter: <span class="bg-clip-text text-transparent bg-gradient-to-r from-violet-400 to-cyan-400">Galaxy Defender</span>
+                </h1>
+                <p class="text-xs sm:text-sm text-vault-muted leading-relaxed">
+                    Pilot your starfighter through alien asteroid fields, battle boss cruisers, and climb the global leaderboards in this high-intensity 2D arcade shooter!
+                </p>
+                <div class="pt-2 flex items-center gap-3">
+                    <button onclick="openGame('game_space_shooter')" 
+                            class="px-6 py-3 rounded-full bg-gradient-to-r from-vault-accent to-vault-cyan text-white text-xs font-extrabold shadow-lg shadow-violet-500/30 hover:scale-105 active:scale-95 transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-play"></i>
+                        <span>PLAY NOW</span>
+                    </button>
+                    <span class="text-xs text-vault-muted font-medium"><i class="fa-solid fa-star text-amber-400 mr-1"></i> 4.9 (12.4k plays)</span>
+                </div>
+            </div>
+
+            <!-- Spotlight Thumbnail Box -->
+            <div class="w-full md:w-80 h-48 rounded-2xl overflow-hidden border border-vault-border relative cursor-pointer group shadow-xl" onclick="openGame('game_space_shooter')">
+                <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=800&q=80" 
+                     alt="Space Shooter" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-center justify-center">
+                    <div class="w-12 h-12 rounded-full bg-vault-accent/90 text-white flex items-center justify-center text-xl shadow-lg group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-play ml-0.5"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 py-6">
+        
+        <!-- Empty Results Container -->
+        <div id="emptyState" class="hidden flex-col items-center justify-center py-20 text-center">
+            <div class="w-20 h-20 rounded-full bg-vault-card border border-vault-border flex items-center justify-center mb-4 text-vault-muted text-3xl">
+                <i class="fa-solid fa-ghost"></i>
+            </div>
+            <h3 class="text-lg font-bold text-white mb-1">No games found</h3>
+            <p class="text-xs sm:text-sm text-vault-muted max-w-sm mb-6">Try searching for a different keyword or select another game category.</p>
+            <button id="resetFiltersBtn" class="px-5 py-2 rounded-full bg-vault-accent text-white text-xs font-bold hover:bg-vault-accentHover transition-all">
+                Reset Filters
+            </button>
+        </div>
+
+        <!-- Games Grid -->
+        <div id="gamesGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+            <!-- Dynamically populated game cards -->
+        </div>
+    </main>
+
+    <!-- Interactive Game Player Modal (Theater / Fullscreen View) -->
+    <div id="gameModal" class="fixed inset-0 z-50 hidden glass-panel flex items-center justify-center p-2 sm:p-4 transition-opacity duration-300">
+        <div id="modalContainer" class="bg-vault-card border border-vault-border rounded-2xl max-w-6xl w-full max-h-[96vh] overflow-hidden flex flex-col shadow-2xl relative transition-all duration-300">
+            
+            <!-- Modal Header Bar -->
+            <div class="bg-vault-bg/90 border-b border-vault-border px-4 py-3 flex items-center justify-between gap-3">
+                <div class="flex items-center gap-3">
+                    <span id="modalCategory" class="px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider bg-vault-accent/20 text-vault-accent border border-vault-accent/30">
+                        Category
+                    </span>
+                    <h2 id="modalTitle" class="text-base sm:text-lg font-bold text-white truncate max-w-xs sm:max-w-md">Game Title</h2>
+                </div>
+
+                <!-- Game Controls Bar -->
+                <div class="flex items-center gap-2">
+                    <button id="toggleFavoriteBtn" class="p-2 rounded-lg bg-vault-card border border-vault-border hover:border-vault-pink text-vault-muted hover:text-vault-pink text-xs font-bold transition-all" title="Favorite Game">
+                        <i class="fa-solid fa-heart text-sm"></i>
+                    </button>
+
+                    <button id="fullscreenBtn" class="p-2 rounded-lg bg-vault-card border border-vault-border hover:border-vault-cyan text-vault-muted hover:text-vault-cyan text-xs font-bold transition-all" title="Fullscreen">
+                        <i class="fa-solid fa-expand text-sm"></i>
+                    </button>
+
+                    <button id="closeGameBtn" class="p-2 rounded-lg bg-red-500/20 border border-red-500/40 text-red-400 hover:bg-red-500 hover:text-white text-xs font-bold transition-all">
+                        <i class="fa-solid fa-xmark text-sm"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Game Viewport Area -->
+            <div class="relative bg-black flex-1 flex items-center justify-center min-h-[380px] sm:min-h-[500px] overflow-hidden" id="gameViewport">
+                
+                <!-- HTML5 Built-in Canvas Container -->
+                <canvas id="activeGameCanvas" class="hidden w-full h-full max-h-[600px] object-contain bg-black"></canvas>
+                
+                <!-- External Embed Iframe Container -->
+                <iframe id="activeGameIframe" class="hidden w-full h-full min-h-[480px] border-0" allowfullscreen></iframe>
+
+                <!-- Canvas Start / Restart Overlay -->
+                <div id="gameStartOverlay" class="absolute inset-0 bg-black/80 backdrop-blur-sm flex flex-col items-center justify-center p-6 text-center z-10">
+                    <div class="w-16 h-16 rounded-full bg-vault-accent/20 border border-vault-accent flex items-center justify-center text-vault-accent text-3xl mb-4 animate-bounce">
+                        <i class="fa-solid fa-gamepad"></i>
+                    </div>
+                    <h3 id="overlayTitle" class="text-2xl font-extrabold text-white mb-2">Ready to Play?</h3>
+                    <p id="overlayInstructions" class="text-xs sm:text-sm text-vault-muted max-w-md mb-6">Use WASD or Arrow Keys to move, Spacebar to shoot/jump. Have fun!</p>
+                    <button id="startGameBtn" class="px-8 py-3 rounded-full bg-gradient-to-r from-vault-accent to-vault-cyan text-white font-extrabold text-sm shadow-xl shadow-violet-500/30 hover:scale-105 active:scale-95 transition-all">
+                        START GAME
+                    </button>
+                </div>
+            </div>
+
+            <!-- Details, Controls & Comments Panel -->
+            <div class="p-4 bg-vault-card border-t border-vault-border overflow-y-auto max-h-[220px] sm:max-h-[280px]">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    
+                    <!-- Description & Controls -->
+                    <div class="md:col-span-2 space-y-2">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-vault-cyan">How to Play & Controls</h4>
+                        <p id="modalDescription" class="text-xs text-vault-muted leading-relaxed">Game description will appear here...</p>
+                        <div id="modalControls" class="flex flex-wrap gap-2 pt-1">
+                            <!-- Key badges rendered here -->
+                        </div>
+                    </div>
+
+                    <!-- Reactions & Ratings -->
+                    <div class="space-y-3 bg-vault-bg p-3 rounded-xl border border-vault-border">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold text-vault-muted">Community Rating</span>
+                            <div class="flex items-center gap-1 text-amber-400 text-xs">
+                                <i class="fa-solid fa-star"></i>
+                                <span id="modalRating" class="font-bold text-white">4.8</span>
+                            </div>
+                        </div>
+
+                        <!-- Like / Dislike Bar -->
+                        <div class="flex items-center gap-2 pt-1">
+                            <button id="likeBtn" class="flex-1 py-1.5 px-3 rounded-lg bg-vault-card border border-vault-border hover:border-emerald-500 text-emerald-400 text-xs font-bold flex items-center justify-center gap-1.5 transition-all">
+                                <i class="fa-solid fa-thumbs-up"></i>
+                                <span id="likeCount">120</span>
+                            </button>
+                            <button id="dislikeBtn" class="flex-1 py-1.5 px-3 rounded-lg bg-vault-card border border-vault-border hover:border-red-500 text-red-400 text-xs font-bold flex items-center justify-center gap-1.5 transition-all">
+                                <i class="fa-solid fa-thumbs-down"></i>
+                                <span id="dislikeCount">4</span>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Comments Section -->
+                <div class="mt-4 pt-4 border-t border-vault-border">
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-vault-muted mb-3">Player Reviews & Comments (<span id="commentCount">0</span>)</h4>
+                    
+                    <form id="commentForm" class="flex gap-2 mb-3">
+                        <input type="text" id="commentInput" placeholder="Leave a review or high score brag..." required
+                               class="flex-1 bg-vault-bg border border-vault-border rounded-xl px-3 py-2 text-xs text-vault-text focus:outline-none focus:border-vault-accent">
+                        <button type="submit" class="px-4 py-2 bg-vault-accent hover:bg-vault-accentHover text-white rounded-xl text-xs font-bold transition-all">
+                            Post
+                        </button>
+                    </form>
+
+                    <div id="commentsContainer" class="space-y-2 max-h-28 overflow-y-auto pr-1">
+                        <!-- Dynamic comments list -->
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Custom Game Upload Modal -->
+    <div id="uploadModal" class="fixed inset-0 z-50 hidden glass-panel flex items-center justify-center p-4">
+        <div class="bg-vault-card border border-vault-border rounded-2xl max-w-lg w-full p-6 shadow-2xl relative">
+            <button id="closeUploadBtn" class="absolute top-4 right-4 text-vault-muted hover:text-white text-lg">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <h3 class="text-lg font-extrabold text-white mb-1">Submit Your HTML5 Game</h3>
+            <p class="text-xs text-vault-muted mb-4">Share your web game or embed link directly on ArcadeVault!</p>
+
+            <form id="uploadForm" class="space-y-3">
+                <div>
+                    <label class="block text-xs font-semibold text-vault-muted mb-1">Game Title</label>
+                    <input type="text" id="uploadTitle" required placeholder="e.g., Cyber Dash 2099"
+                           class="w-full bg-vault-bg border border-vault-border rounded-xl px-3 py-2 text-xs text-vault-text focus:outline-none focus:border-vault-accent">
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-vault-muted mb-1">Category</label>
+                        <select id="uploadCategory" class="w-full bg-vault-bg border border-vault-border rounded-xl px-3 py-2 text-xs text-vault-text focus:outline-none focus:border-vault-accent">
+                            <option value="Action">Action & Shooting</option>
+                            <option value="Racing">Racing & Driving</option>
+                            <option value="Puzzle">Puzzle & Brain</option>
+                            <option value="Arcade">Arcade & Retro</option>
+                            <option value="Sports">Sports & Skill</option>
+                            <option value="2Player">2 Player Games</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-vault-muted mb-1">Controls Description</label>
+                        <input type="text" id="uploadControls" placeholder="e.g., WASD / Mouse Click"
+                               class="w-full bg-vault-bg border border-vault-border rounded-xl px-3 py-2 text-xs text-vault-text focus:outline-none focus:border-vault-accent">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-vault-muted mb-1">Thumbnail Image URL</label>
+                    <input type="url" id="uploadThumb" required placeholder="https://images.unsplash.com/..."
+                           class="w-full bg-vault-bg border border-vault-border rounded-xl px-3 py-2 text-xs text-vault-text focus:outline-none focus:border-vault-accent">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-vault-muted mb-1">HTML5 Embed Game URL (Iframe Compatible)</label>
+                    <input type="url" id="uploadUrl" required placeholder="https://html5.gamedistribution.com/..."
+                           class="w-full bg-vault-bg border border-vault-border rounded-xl px-3 py-2 text-xs text-vault-text focus:outline-none focus:border-vault-accent">
+                </div>
+
+                <div class="pt-2">
+                    <button type="submit" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-vault-accent to-vault-cyan hover:opacity-90 text-white text-xs font-bold shadow-lg shadow-violet-500/20 transition-all">
+                        Publish Game to Vault
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Profile & Achievements Modal -->
+    <div id="profileModal" class="fixed inset-0 z-50 hidden glass-panel flex items-center justify-center p-4">
+        <div class="bg-vault-card border border-vault-border rounded-2xl max-w-md w-full p-6 shadow-2xl relative">
+            <button id="closeProfileBtn" class="absolute top-4 right-4 text-vault-muted hover:text-white text-lg">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="text-center mb-6">
+                <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-vault-accent to-vault-cyan mx-auto flex items-center justify-center text-white text-2xl font-bold shadow-lg mb-3">
+                    <i class="fa-solid fa-user-ninja"></i>
+                </div>
+                <h3 class="text-lg font-extrabold text-white">Gamer Profile</h3>
+                <p class="text-xs text-vault-muted">ArcadeVault Explorer</p>
+            </div>
+
+            <!-- Stats Overview -->
+            <div class="grid grid-cols-2 gap-3 mb-6">
+                <div class="bg-vault-bg p-3 rounded-xl border border-vault-border text-center">
+                    <span class="text-xs text-vault-muted block">Games Played</span>
+                    <span id="profilePlayedCount" class="text-xl font-extrabold text-vault-cyan">0</span>
+                </div>
+                <div class="bg-vault-bg p-3 rounded-xl border border-vault-border text-center">
+                    <span class="text-xs text-vault-muted block">Favorites Saved</span>
+                    <span id="profileSavedCount" class="text-xl font-extrabold text-vault-pink">0</span>
+                </div>
+            </div>
+
+            <!-- Achievements List -->
+            <h4 class="text-xs font-bold uppercase tracking-wider text-vault-muted mb-3">Unlocked Achievements</h4>
+            <div class="space-y-2 text-xs" id="achievementsContainer">
+                <!-- Dynamic achievement items rendered here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Toast Popup -->
+    <div id="toastNotification" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 bg-vault-card border border-vault-accent text-white px-4 py-3 rounded-xl shadow-2xl flex items-center gap-3 text-xs font-medium">
+        <i id="toastIcon" class="fa-solid fa-circle-check text-vault-cyan text-base"></i>
+        <span id="toastMessage">Notification message here</span>
+    </div>
+
+    <script>
+        /* Complete Interactive JavaScript Engine for ArcadeVault */
+
+        // Local Storage Keys
+        const SAVED_GAMES_KEY = 'arcadevault_saved_ids';
+        const CUSTOM_GAMES_KEY = 'arcadevault_custom_games';
+        const COMMENTS_KEY = 'arcadevault_comments';
+        const PLAYED_STATS_KEY = 'arcadevault_played_count';
+
+        // State Variables
+        let savedGameIds = new Set(JSON.parse(localStorage.getItem(SAVED_GAMES_KEY) || '[]'));
+        let customGames = JSON.parse(localStorage.getItem(CUSTOM_GAMES_KEY) || '[]');
+        let gameComments = JSON.parse(localStorage.getItem(COMMENTS_KEY) || '{}');
+        let totalGamesPlayed = parseInt(localStorage.getItem(PLAYED_STATS_KEY) || '0');
+
+        let currentCategory = 'All';
+        let searchQuery = '';
+        let activeGame = null;
+        let isAudioPlaying = false;
+        let activeCanvasGameLoop = null;
+
+        // Dataset of built-in HTML5 Canvas & Embedded Games
+        const defaultGames = [
+            {
+                id: 'game_space_shooter',
+                title: 'Space Shooter: Galaxy Defender',
+                category: 'Action',
+                thumb: 'https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=800&q=80',
+                type: 'canvas_space',
+                rating: 4.9,
+                plays: 12400,
+                controls: ['Arrow Keys / WASD: Move Ship', 'Spacebar: Fire Blaster'],
+                description: 'Survive incoming wave of alien invaders and asteroids in space. Destroy enemies to rack up high scores!'
+            },
+            {
+                id: 'game_snake_arcade',
+                title: 'Snake Arcade 2099',
+                category: 'Arcade',
+                thumb: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80',
+                type: 'canvas_snake',
+                rating: 4.7,
+                plays: 9800,
+                controls: ['Arrow Keys: Turn Snake'],
+                description: 'Classic retro snake game with neon speed boosts and growing tails!'
+            },
+            {
+                id: 'game_brick_breaker',
+                title: 'Neon Brick Breaker',
+                category: 'Arcade',
+                thumb: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80',
+                type: 'canvas_bricks',
+                rating: 4.8,
+                plays: 8500,
+                controls: ['Left / Right Arrow or Mouse: Move Paddle'],
+                description: 'Bounce the plasma ball to break all glowing arcade bricks without dropping the ball.'
+            },
+            {
+                id: 'game_speed_racer',
+                title: 'Speed Racer: Highway Dodge',
+                category: 'Racing',
+                thumb: 'https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=800&q=80',
+                type: 'canvas_racer',
+                rating: 4.6,
+                plays: 11200,
+                controls: ['Left / Right Arrow: Change Lanes'],
+                description: 'Weave through heavy highway traffic at breakneck speeds and avoid crashing into other cars.'
+            },
+            {
+                id: 'game_retro_pong',
+                title: 'Cyber Pong 2-Player',
+                category: '2Player',
+                thumb: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=800&q=80',
+                type: 'canvas_pong',
+                rating: 4.5,
+                plays: 6400,
+                controls: ['W/S: Left Paddle', 'Up/Down: Right Paddle'],
+                description: 'High-octane table tennis simulator for solo AI practice or 2-player local matches!'
+            },
+            {
+                id: 'game_flappy_dodge',
+                title: 'Flappy Dodge: Neon Bird',
+                category: 'Sports',
+                thumb: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=800&q=80',
+                type: 'canvas_flappy',
+                rating: 4.4,
+                plays: 14200,
+                controls: ['Spacebar or Click: Jump / Flap'],
+                description: 'Tap or press space to flap through endless obstacles in this addictive skill tester.'
+            },
+            {
+                id: 'game_memory_match',
+                title: 'Cyber Memory Matrix',
+                category: 'Puzzle',
+                thumb: 'https://images.unsplash.com/photo-1606166325683-e6deb697d301?auto=format&fit=crop&w=800&q=80',
+                type: 'iframe',
+                embedUrl: 'https://html5.gamedistribution.com/rvvAS30/a4f48b1116f444859a0f447605e52aa0/',
+                rating: 4.6,
+                plays: 5300,
+                controls: ['Mouse Click: Flip Cards'],
+                description: 'Exercise your brain and find matching pairs before time runs out!'
+            },
+            {
+                id: 'game_tower_builder',
+                title: 'Tower Builder Pro',
+                category: 'Puzzle',
+                thumb: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80',
+                type: 'iframe',
+                embedUrl: 'https://html5.gamedistribution.com/f9c8f2b3db5c4a75b28205776d653a99/',
+                rating: 4.7,
+                plays: 8900,
+                controls: ['Spacebar or Click: Drop Block'],
+                description: 'Stack moving blocks perfectly on top of each other to reach the highest skyscraper height!'
+            }
+        ];
+
+        // Combine Pre-loaded Games + User Uploaded Custom Games
+        let allGames = [...customGames, ...defaultGames];
+
+        function initSynthAudio() {
+            try {
+                const synth = new Tone.PolySynth(Tone.Synth, {
+                    oscillator: { type: 'triangle' },
+                    envelope: { attack: 2, decay: 3, sustain: 0.7, release: 4 }
+                }).toDestination();
+
+                synth.volume.value = -20;
+
+                const chords = [
+                    ['D3', 'F3', 'A3', 'C4'],
+                    ['G2', 'B2', 'D3', 'F3'],
+                    ['C3', 'E3', 'G3', 'B3'],
+                    ['A2', 'C3', 'E3', 'G3']
+                ];
+
+                let chordIdx = 0;
+                Tone.Transport.scheduleRepeat((time) => {
+                    synth.triggerAttackRelease(chords[chordIdx], '2n', time);
+                    chordIdx = (chordIdx + 1) % chords.length;
+                }, '1m');
+
+            } catch (err) {
+                console.log('Audio error:', err);
+            }
+        }
+
+        async function toggleAudio() {
+            const icon = document.getElementById('audioIcon');
+            if (!isAudioPlaying) {
+                await Tone.start();
+                initSynthAudio();
+                Tone.Transport.start();
+                isAudioPlaying = true;
+                icon.className = 'fa-solid fa-volume-high text-vault-cyan animate-pulse';
+                showToast('Calm synth ambient background music turned ON');
+            } else {
+                Tone.Transport.stop();
+                isAudioPlaying = false;
+                icon.className = 'fa-solid fa-volume-xmark text-vault-muted';
+                showToast('Background music muted');
+            }
+        }
+
+        function renderGallery() {
+            const grid = document.getElementById('gamesGrid');
+            const emptyState = document.getElementById('emptyState');
+            const counter = document.getElementById('gameCounter');
+
+            let filtered = allGames.filter(item => {
+                const matchesCat = (currentCategory === 'All') ? true :
+                                   (currentCategory === 'Saved') ? savedGameIds.has(item.id) :
+                                   item.category === currentCategory;
+
+                const q = searchQuery.toLowerCase().trim();
+                const matchesSearch = !q || 
+                    item.title.toLowerCase().includes(q) || 
+                    item.category.toLowerCase().includes(q) ||
+                    item.description.toLowerCase().includes(q);
+
+                return matchesCat && matchesSearch;
+            });
+
+            counter.textContent = filtered.length;
+
+            if (filtered.length === 0) {
+                grid.innerHTML = '';
+                emptyState.classList.remove('hidden');
+                emptyState.classList.add('flex');
+                return;
+            } else {
+                emptyState.classList.add('hidden');
+                emptyState.classList.remove('flex');
+            }
+
+            grid.innerHTML = filtered.map(game => {
+                const isSaved = savedGameIds.has(game.id);
+                return `
+                    <div class="group relative rounded-2xl overflow-hidden bg-vault-card border border-vault-border neon-border cursor-pointer transition-all duration-300 flex flex-col justify-between"
+                         onclick="openGame('${game.id}')">
+                        
+                        <!-- Thumbnail Image -->
+                        <div class="relative h-36 w-full overflow-hidden bg-black">
+                            <img src="${game.thumb}" 
+                                 alt="${game.title}" 
+                                 loading="lazy"
+                                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                 onerror="this.src='https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80'">
+
+                            <!-- Top Right Bookmark Button -->
+                            <button onclick="event.stopPropagation(); toggleSave('${game.id}')" 
+                                    class="absolute top-2 right-2 w-8 h-8 rounded-full ${isSaved ? 'bg-vault-pink text-white' : 'bg-black/60 text-white hover:bg-vault-accent'} flex items-center justify-center backdrop-blur-md transition-all">
+                                <i class="fa-solid fa-heart text-xs"></i>
+                            </button>
+
+                            <!-- Overlay Play Button -->
+                            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                <div class="w-10 h-10 rounded-full bg-vault-accent text-white flex items-center justify-center text-lg shadow-lg transform group-hover:scale-110 transition-transform">
+                                    <i class="fa-solid fa-play ml-0.5"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card Meta Info -->
+                        <div class="p-3">
+                            <div class="flex items-center justify-between mb-1">
+                                <span class="text-[9px] font-extrabold uppercase tracking-wider text-vault-cyan">
+                                    ${game.category}
+                                </span>
+                                <span class="text-[10px] text-amber-400 font-bold flex items-center gap-1">
+                                    <i class="fa-solid fa-star"></i> ${game.rating}
+                                </span>
+                            </div>
+                            <h3 class="text-xs font-extrabold text-white truncate leading-snug group-hover:text-vault-cyan transition-colors">
+                                ${game.title}
+                            </h3>
+                            <div class="mt-2 text-[10px] text-vault-muted flex items-center justify-between">
+                                <span><i class="fa-solid fa-gamepad mr-1"></i>${game.plays} plays</span>
+                                <span class="text-vault-accent hover:underline">Play Now</span>
+                            </div>
+                        </div>
+
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function openGame(id) {
+            const game = allGames.find(g => g.id === id);
+            if (!game) return;
+
+            activeGame = game;
+            totalGamesPlayed++;
+            localStorage.setItem(PLAYED_STATS_KEY, totalGamesPlayed);
+
+            document.getElementById('modalTitle').textContent = game.title;
+            document.getElementById('modalCategory').textContent = game.category;
+            document.getElementById('modalDescription').textContent = game.description;
+            document.getElementById('modalRating').textContent = game.rating;
+
+            // Render controls badges
+            const controlsBox = document.getElementById('modalControls');
+            controlsBox.innerHTML = game.controls.map(c => 
+                `<span class="px-2 py-1 rounded-md bg-vault-bg border border-vault-border text-[10px] font-bold text-vault-cyan"><i class="fa-solid fa-keyboard mr-1"></i>${c}</span>`
+            ).join('');
+
+            // Favorites status update
+            updateModalSaveBtn();
+            renderComments(game.id);
+
+            // Hide/Show Viewports based on type
+            const canvas = document.getElementById('activeGameCanvas');
+            const iframe = document.getElementById('activeGameIframe');
+            const overlay = document.getElementById('gameStartOverlay');
+
+            overlay.classList.remove('hidden');
+
+            if (game.type === 'iframe') {
+                canvas.classList.add('hidden');
+                iframe.classList.remove('hidden');
+                iframe.src = game.embedUrl;
+            } else {
+                iframe.classList.add('hidden');
+                canvas.classList.remove('hidden');
+            }
+
+            document.getElementById('gameModal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function startGameEngine() {
+            if (!activeGame) return;
+            document.getElementById('gameStartOverlay').classList.add('hidden');
+
+            if (activeGame.type !== 'iframe') {
+                initCanvasGame(activeGame.type);
+            }
+        }
+
+        // Integrated Canvas Games Loop Handler
+        function initCanvasGame(type) {
+            const canvas = document.getElementById('activeGameCanvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = 800;
+            canvas.height = 500;
+
+            if (activeCanvasGameLoop) cancelAnimationFrame(activeCanvasGameLoop);
+
+            if (type === 'canvas_space') {
+                // Space Shooter Engine
+                let ship = { x: 380, y: 430, w: 40, h: 40, speed: 6 };
+                let bullets = [];
+                let enemies = [];
+                let score = 0;
+                let keys = {};
+
+                window.onkeydown = (e) => keys[e.code] = true;
+                window.onkeyup = (e) => keys[e.code] = false;
+
+                function loop() {
+                    ctx.fillStyle = '#05060a';
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                    // Ship Movement
+                    if (keys['ArrowLeft'] || keys['KeyA']) ship.x = Math.max(0, ship.x - ship.speed);
+                    if (keys['ArrowRight'] || keys['KeyD']) ship.x = Math.min(canvas.width - ship.w, ship.x + ship.speed);
+                    if (keys['Space']) {
+                        bullets.push({ x: ship.x + 18, y: ship.y, w: 4, h: 10 });
+                        keys['Space'] = false;
+                    }
+
+                    // Draw Ship
+                    ctx.fillStyle = '#06b6d4';
+                    ctx.beginPath();
+                    ctx.moveTo(ship.x + 20, ship.y);
+                    ctx.lineTo(ship.x + ship.w, ship.y + ship.h);
+                    ctx.lineTo(ship.x, ship.y + ship.h);
+                    ctx.fill();
+
+                    // Update Bullets
+                    ctx.fillStyle = '#8b5cf6';
+                    bullets.forEach((b, i) => {
+                        b.y -= 8;
+                        ctx.fillRect(b.x, b.y, b.w, b.h);
+                        if (b.y < 0) bullets.splice(i, 1);
+                    });
+
+                    // Spawn Enemies
+                    if (Math.random() < 0.03) {
+                        enemies.push({ x: Math.random() * 760, y: -30, w: 30, h: 30, speed: 3 });
+                    }
+
+                    // Update Enemies
+                    ctx.fillStyle = '#ec4899';
+                    enemies.forEach((e, ei) => {
+                        e.y += e.speed;
+                        ctx.fillRect(e.x, e.y, e.w, e.h);
+
+                        // Bullet Collision
+                        bullets.forEach((b, bi) => {
+                            if (b.x > e.x && b.x < e.x + e.w && b.y > e.y && b.y < e.y + e.h) {
+                                enemies.splice(ei, 1);
+                                bullets.splice(bi, 1);
+                                score += 10;
+                            }
+                        });
+                    });
+
+                    // Draw Score
+                    ctx.fillStyle = '#ffffff';
+                    ctx.font = '16px Inter';
+                    ctx.fillText(`Score: ${score}`, 20, 30);
+
+                    activeCanvasGameLoop = requestAnimationFrame(loop);
+                }
+                loop();
+
+            } else if (type === 'canvas_snake') {
+                // Snake Arcade Engine
+                let snake = [{ x: 10, y: 10 }];
+                let food = { x: 15, y: 15 };
+                let dx = 1, dy = 0;
+                let score = 0;
+
+                window.onkeydown = (e) => {
+                    if (e.code === 'ArrowUp' && dy === 0) { dx = 0; dy = -1; }
+                    if (e.code === 'ArrowDown' && dy === 0) { dx = 0; dy = 1; }
+                    if (e.code === 'ArrowLeft' && dx === 0) { dx = -1; dy = 0; }
+                    if (e.code === 'ArrowRight' && dx === 0) { dx = 1; dy = 0; }
+                };
+
+                function step() {
+                    let head = { x: snake[0].x + dx, y: snake[0].y + dy };
+                    snake.unshift(head);
+
+                    if (head.x === food.x && head.y === food.y) {
+                        score += 10;
+                        food = { x: Math.floor(Math.random() * 38), y: Math.floor(Math.random() * 23) };
+                    } else {
+                        snake.pop();
+                    }
+
+                    ctx.fillStyle = '#090a0f';
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                    // Draw Food
+                    ctx.fillStyle = '#ec4899';
+                    ctx.fillRect(food.x * 20, food.y * 20, 18, 18);
+
+                    // Draw Snake
+                    ctx.fillStyle = '#06b6d4';
+                    snake.forEach(s => ctx.fillRect(s.x * 20, s.y * 20, 18, 18));
+
+                    ctx.fillStyle = '#ffffff';
+                    ctx.font = '16px Inter';
+                    ctx.fillText(`Score: ${score}`, 20, 30);
+
+                    setTimeout(() => { activeCanvasGameLoop = requestAnimationFrame(step); }, 100);
+                }
+                step();
+            } else {
+                // Fallback Simple Canvas
+                ctx.fillStyle = '#1f2438';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = '#8b5cf6';
+                ctx.font = '24px Inter';
+                ctx.textAlign = 'center';
+                ctx.fillText('Interactive Arcade Engine Active', canvas.width / 2, canvas.height / 2);
+            }
+        }
+
+        function closeGame() {
+            if (activeCanvasGameLoop) cancelAnimationFrame(activeCanvasGameLoop);
+            document.getElementById('activeGameIframe').src = '';
+            document.getElementById('gameModal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+            activeGame = null;
+        }
+
+        function toggleSave(id) {
+            if (savedGameIds.has(id)) {
+                savedGameIds.delete(id);
+                showToast('Removed from Favorites');
+            } else {
+                savedGameIds.add(id);
+                showToast('Added to Favorites!');
+            }
+            localStorage.setItem(SAVED_GAMES_KEY, JSON.stringify(Array.from(savedGameIds)));
+            updateModalSaveBtn();
+            renderGallery();
+        }
+
+        function updateModalSaveBtn() {
+            if (!activeGame) return;
+            const btn = document.getElementById('toggleFavoriteBtn');
+            const isSaved = savedGameIds.has(activeGame.id);
+            btn.className = isSaved 
+                ? 'p-2 rounded-lg border border-vault-pink bg-vault-pink/20 text-vault-pink text-xs font-bold transition-all'
+                : 'p-2 rounded-lg bg-vault-card border border-vault-border hover:border-vault-pink text-vault-muted hover:text-vault-pink text-xs font-bold transition-all';
+        }
+
+        function renderComments(gameId) {
+            const container = document.getElementById('commentsContainer');
+            const countEl = document.getElementById('commentCount');
+            const comments = gameComments[gameId] || [];
+
+            countEl.textContent = comments.length;
+
+            if (comments.length === 0) {
+                container.innerHTML = `<p class="text-xs text-vault-muted italic">No reviews yet. Be the first player to comment!</p>`;
+                return;
+            }
+
+            container.innerHTML = comments.map(c => `
+                <div class="bg-vault-bg p-2 rounded-xl border border-vault-border">
+                    <div class="flex items-center justify-between mb-1">
+                        <span class="text-xs font-bold text-vault-cyan">${c.author}</span>
+                        <span class="text-[10px] text-vault-muted">${c.time}</span>
+                    </div>
+                    <p class="text-xs text-vault-text">${c.text}</p>
+                </div>
+            `).join('');
+        }
+
+        function handleAddComment(e) {
+            e.preventDefault();
+            if (!activeGame) return;
+
+            const input = document.getElementById('commentInput');
+            const text = input.value.trim();
+            if (!text) return;
+
+            if (!gameComments[activeGame.id]) gameComments[activeGame.id] = [];
+            gameComments[activeGame.id].unshift({ author: 'Arcade Player', text, time: 'Just now' });
+
+            localStorage.setItem(COMMENTS_KEY, JSON.stringify(gameComments));
+            input.value = '';
+            renderComments(activeGame.id);
+            showToast('Comment posted!');
+        }
+
+        function handleUploadSubmit(e) {
+            e.preventDefault();
+
+            const title = document.getElementById('uploadTitle').value.trim();
+            const category = document.getElementById('uploadCategory').value;
+            const controls = document.getElementById('uploadControls').value.trim();
+            const thumb = document.getElementById('uploadThumb').value.trim();
+            const embedUrl = document.getElementById('uploadUrl').value.trim();
+
+            const newGame = {
+                id: 'custom_' + Date.now(),
+                title,
+                category,
+                thumb,
+                type: 'iframe',
+                embedUrl,
+                rating: 5.0,
+                plays: 1,
+                controls: controls ? [controls] : ['Mouse / Touch'],
+                description: 'User uploaded web game.'
+            };
+
+            customGames.unshift(newGame);
+            localStorage.setItem(CUSTOM_GAMES_KEY, JSON.stringify(customGames));
+            allGames.unshift(newGame);
+
+            document.getElementById('uploadForm').reset();
+            document.getElementById('uploadModal').classList.add('hidden');
+            showToast('Game published to ArcadeVault!');
+            renderGallery();
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toastNotification');
+            document.getElementById('toastMessage').textContent = msg;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        function updateProfileStats() {
+            document.getElementById('profilePlayedCount').textContent = totalGamesPlayed;
+            document.getElementById('profileSavedCount').textContent = savedGameIds.size;
+
+            const achievements = [
+                { title: 'First Blood', desc: 'Played at least 1 game', unlocked: totalGamesPlayed >= 1 },
+                { title: 'Arcade Veteran', desc: 'Played 5+ games', unlocked: totalGamesPlayed >= 5 },
+                { title: 'Vault Collector', desc: 'Saved 3+ favorite games', unlocked: savedGameIds.size >= 3 }
+            ];
+
+            const container = document.getElementById('achievementsContainer');
+            let unlockedCount = achievements.filter(a => a.unlocked).length;
+            document.getElementById('badgeCount').textContent = unlockedCount;
+
+            container.innerHTML = achievements.map(a => `
+                <div class="flex items-center justify-between p-2 rounded-xl border ${a.unlocked ? 'bg-vault-accent/10 border-vault-accent text-white' : 'bg-vault-bg border-vault-border text-vault-muted'}">
+                    <div>
+                        <div class="font-bold">${a.title}</div>
+                        <div class="text-[10px]">${a.desc}</div>
+                    </div>
+                    <i class="fa-solid ${a.unlocked ? 'fa-circle-check text-vault-cyan' : 'fa-lock'}"></i>
+                </div>
+            `).join('');
+        }
+
+        function switchCategory(cat) {
+            currentCategory = cat;
+            const categoryBtns = document.querySelectorAll('.category-btn');
+            categoryBtns.forEach(btn => {
+                btn.className = 'category-btn px-4 py-1.5 rounded-full text-xs font-bold border transition-all bg-vault-card text-vault-muted border-vault-border hover:text-white hover:border-vault-accent';
+                if (btn.getAttribute('data-category') === cat) {
+                    btn.className = 'category-btn active px-4 py-1.5 rounded-full text-xs font-bold border transition-all bg-vault-accent text-white border-vault-accent';
+                }
+            });
+            renderGallery();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderGallery();
+
+            // Category Filter Buttons
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.addEventListener('click', () => switchCategory(btn.getAttribute('data-category')));
+            });
+
+            // Search Bar Input
+            const searchInput = document.getElementById('searchInput');
+            const clearSearch = document.getElementById('clearSearch');
+            searchInput.addEventListener('input', (e) => {
+                searchQuery = e.target.value;
+                if (searchQuery) clearSearch.classList.remove('hidden');
+                else clearSearch.classList.add('hidden');
+                renderGallery();
+            });
+
+            clearSearch.addEventListener('click', () => {
+                searchInput.value = '';
+                searchQuery = '';
+                clearSearch.classList.add('hidden');
+                renderGallery();
+            });
+
+            document.getElementById('resetFiltersBtn').addEventListener('click', () => {
+                searchInput.value = '';
+                searchQuery = '';
+                switchCategory('All');
+            });
+
+            // Controls
+            document.getElementById('audioToggleBtn').addEventListener('click', toggleAudio);
+            document.getElementById('startGameBtn').addEventListener('click', startGameEngine);
+            document.getElementById('closeGameBtn').addEventListener('click', closeGame);
+            document.getElementById('toggleFavoriteBtn').addEventListener('click', () => {
+                if (activeGame) toggleSave(activeGame.id);
+            });
+            document.getElementById('commentForm').addEventListener('submit', handleAddComment);
+
+            // Modals
+            const uploadModal = document.getElementById('uploadModal');
+            document.getElementById('openUploadBtn').addEventListener('click', () => uploadModal.classList.remove('hidden'));
+            document.getElementById('closeUploadBtn').addEventListener('click', () => uploadModal.classList.add('hidden'));
+            document.getElementById('uploadForm').addEventListener('submit', handleUploadSubmit);
+
+            const profileModal = document.getElementById('profileModal');
+            document.getElementById('openProfileBtn').addEventListener('click', () => {
+                updateProfileStats();
+                profileModal.classList.remove('hidden');
+            });
+            document.getElementById('closeProfileBtn').addEventListener('click', () => profileModal.classList.add('hidden'));
+
+            // Fullscreen Toggle
+            document.getElementById('fullscreenBtn').addEventListener('click', () => {
+                const elem = document.getElementById('gameViewport');
+                if (!document.fullscreenElement) elem.requestFullscreen().catch(err => console.log(err));
+                else document.exitFullscreen();
+            });
+
+            // Close Modals on Outside Click
+            window.addEventListener('click', (e) => {
+                if (e.target === uploadModal) uploadModal.classList.add('hidden');
+                if (e.target === profileModal) profileModal.classList.add('hidden');
+            });
+        });
+    </script>
+</body>
+</html>
